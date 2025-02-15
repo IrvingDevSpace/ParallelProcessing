@@ -85,4 +85,19 @@
 
 一千萬筆|00:00:24.3013369|3.3GBGB|63W
 
+八千萬筆|00:03:03.9992713|4.2GB|250W cpu5
+八千萬筆|00:03:40.8456505|10.7GB|250W cpu16
+八千萬筆|30以上|15.7GB|500W cpu16
 
+## 實驗5 (Parallel 分批讀取 + 分批寫入(同檔案) Dispose)
+一千萬筆|00:00:38.6826575|4.6GB|250W cpu5 lock
+一千萬筆|00:00:37.0433705|4.1GB|250W cpu5 mutex
+一千萬筆|00:00:34.5921988|4GB|250W cpu5 concurrentQueue
+一千萬筆|00:00:35.6498025|4.1GB|250W cpu5 concurrentBag
+一千萬筆|00:00:42.5536169|4.1GB|250W cpu5 ReaderWriterLockSlim
+
+## 高效讀寫 => 先取出線性的單筆讀取最大值
+## 用最大值做 Parallel 分批讀取
+## 並且設定MaxDegreeOfParallelism(執行續開啟上限) = 5
+## 寫入時1000萬筆時，使用ConcurrentBag效果最佳
+## 8000待測試
